@@ -1,3 +1,4 @@
+`include "alu.v"
 module top (
     ports
 );
