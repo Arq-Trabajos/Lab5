@@ -84,13 +84,6 @@ module dmem (
 );
 	
 	reg [31:0] RAM [63:0];
-
-/* 	integer i=0;
-	initial begin
-		for(i = 0; i<64; i=i+1)
-			RAM[i] = 0;
-	end */
-
 	assign rd = RAM[a[31:2]];
 
 	always @(posedge clk) begin
@@ -260,6 +253,7 @@ module decode (
 	end
 	assign PCS = ((Rd == 4'b1111) & RegW) | Branch;
 endmodule
+
 module condlogic (
 	input wire clk,
 	input wire reset,

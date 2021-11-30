@@ -15,7 +15,7 @@ module alu (
 			2'b0?: Result = Sum; // ALUControl signal 00/01 means ADD and SUB, so either way A and B will be added
 			2'b10: Result = A & B; // ALUControl signal 10 means AND
 			2'b11: Result = A | B; // ALUControl signal 01 means OR
-			// 2'b01: Result = A ^ B;
+			2'b01: Result = A ^ B;
 		endcase
 	end
 
@@ -25,8 +25,5 @@ module alu (
 	assign Carry = ~ALUControl[1] & Sum[32]; // Carry will be 1 if the ALUControl signal is addition or subtraction and if the 1st bit from the left bit is 1
 
 	assign ALUFlags = {Negative, Zero, Carry, Overflow}; // We group each bit-flag to the ALUFlags output    
-
-	initial
-	$display("%d %d %d %d %d", A, B, ALUControl, Result, ALUFlags);
 
 endmodule
