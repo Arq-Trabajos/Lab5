@@ -27,12 +27,10 @@ module testbench;
 		if (MemWrite) begin
 			if ((DataAdr === 100) & (WriteData === 7)) begin
 				$display("Simulation succeeded");
-				$stop;
 				$finish;
 			end
 			else if (DataAdr !== 96) begin
 				$display("Simulation failed");
-				$stop;
 				$finish;
 			end
 		end
@@ -107,12 +105,13 @@ module imem (
 );
 
 	initial $display(" IMEME: %d %d", a, rd);
-	reg [31:0] RAM [2:0];
+	reg [31:0] RAM [22:0];
 	initial begin 
 		$readmemh("memfile.dat", RAM);
 	end
 
 	assign rd = RAM[a[31:2]];
+	initial $display("RD: %d", rd);
 endmodule
 module arm (
 	input wire clk,
