@@ -1,25 +1,36 @@
 `include "alu.v"
 module top (
-    ports
+    input clk
 );
-    
+
+    reg [31:0] PC;
+
+    initial begin
+        PC = 31'b0;
+    end
+
+    always posedge clk begin
+        PC = (PCSrc)?(PC+4):Result;
+    end
+
 endmodule
 
 module dmem (
-    input clk, input [31:0] MemWrite, input [31:0] ALUResult, [31:0] WriteData,
+    input clk, input [31:0] MemWrite, input [31:0] ALUResult, input [31:0] WriteData,
     output [31:0] ReadData
 );
     
 endmodule
 
 module imem (
-    ports
+    input [31:0] PC,
+    output [31:0] Instruction
 );
     
 endmodule
 
 module controller (
-    ports
+    
 );
     
 endmodule
