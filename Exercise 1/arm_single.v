@@ -236,6 +236,8 @@ module decode (
 			2'b01:
 				if (Funct[0])
 					controls = 10'b0001111000;
+				if (Funct[2])
+					controls = 10'b0001111010;
 				else
 					controls = 10'b1001110100;
 			2'b10: controls = 10'b0110100010;
