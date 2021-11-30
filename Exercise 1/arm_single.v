@@ -104,14 +104,12 @@ module imem (
 	output wire [31:0] rd
 );
 
-	initial $display(" IMEME: %d %d", a, rd);
 	reg [31:0] RAM [22:0];
 	initial begin 
 		$readmemh("memfile.dat", RAM);
 	end
 
 	assign rd = RAM[a[31:2]];
-	initial $display("RD: %d", rd);
 endmodule
 module arm (
 	input wire clk,
@@ -236,8 +234,6 @@ module decode (
 			2'b01:
 				if (Funct[0])
 					controls = 10'b0001111000;
-				if (Funct[2])
-					controls = 10'b0001111010;
 				else
 					controls = 10'b1001110100;
 			2'b10: controls = 10'b0110100010;
@@ -424,9 +420,7 @@ module datapath (
 		.s(ALUSrc),
 		.y(SrcB)
 	);
-	initial begin
-		$display("%d", SrcA);
-	end
+
 	alu alu(
 		.A(SrcA),
 		.B(SrcB),
@@ -448,7 +442,6 @@ module regfile (
 	output wire [31:0] rd2
 );
 
-	initial $display("REGDILE: %d %d %d %d %d %d", we3, ra1, ra2, wa3, wd3, r15);
 
 	reg [31:0] rf [14:0];
 	always @(posedge clk) begin
@@ -457,7 +450,6 @@ module regfile (
 	end
 	assign rd1 = (ra1 == 4'b1111 ? r15 : rf[ra1]);
 	assign rd2 = (ra2 == 4'b1111 ? r15 : rf[ra2]);
-	initial $display("%d", rd1);
 endmodule
 module extend (
 	input wire [23:0] Instr,
